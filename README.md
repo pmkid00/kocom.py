@@ -1,24 +1,27 @@
-# Hass.io Add-on: Kocom Wallpad with RS485 
+# Hass.io Add-on: Kocom Wallpad with RS485 (Fork)
 
 ![Supports aarch64 Architecture][aarch64-shield] ![Supports amd64 Architecture][amd64-shield] ![Supports armhf Architecture][armhf-shield] ![Supports armv7 Architecture][armv7-shield] ![Supports i386 Architecture][i386-shield]
 
 ## About
-Kocom Wallpad with RS485
+Kocom Wallpad with RS485 fork for Home Assistant
 
 ## Installation
 
-1. 홈어시스턴트의 Hass.io > ADD-ON STORE에서 Add new repository by URL에 https://github.com/clipman/kocom.py 를 입력한 다음 ADD 버튼을 누릅니다.
-2. ADD-ON STORE 페이지 하단에서 "Kocom Wallpad with RS485" 클릭합니다.
-3. "INSTALL" 버튼을 누르면 애드온이 설치됩니다. 최대 약 10분 정도 소요. 
-4. INSTALL 버튼위에 설치 애니메이션이 동작하는데 이것이 멈추더라도 REBUILD, START 버튼이 나타나지 않는 경우가 있습니다.
-5. 이 애드온은 이미지를 내려받는 것이 아니라 직접 여러분의 Hassio에서 이미지를 만듭니다.
-6. INSTALL 버튼을 누른다음 설치 애니메이션이 실행되면 제대로 설치중인 것입니다.
-7. share/kocom/ 폴더에 있는 kocom.conf 파일을 본인의 환경에 맞게 수정합니다.
-8. "START" 버튼으로 애드온을 실행합니다.
+1. 이 저장소를 본인 GitHub 계정으로 fork 합니다.
+2. 필요한 메타데이터를 본인 환경에 맞게 수정합니다.
+3. 홈어시스턴트의 Add-on Store에서 Add new repository by URL에 본인 fork 저장소 URL `https://github.com/pmkid00/kocom.py` 를 입력한 다음 추가합니다.
+4. Add-on Store 페이지 하단에서 "Kocom Wallpad with RS485 (Fork)" 클릭합니다.
+5. "INSTALL" 버튼을 누르면 애드온이 설치됩니다. 최대 약 10분 정도 소요.
+6. INSTALL 버튼 위에 설치 애니메이션이 동작하는데 이것이 멈추더라도 REBUILD, START 버튼이 나타나지 않는 경우가 있습니다.
+7. 이 애드온은 이미지를 내려받는 것이 아니라 직접 여러분의 Hassio에서 이미지를 만듭니다.
+8. INSTALL 버튼을 누른 다음 설치 애니메이션이 실행되면 제대로 설치중인 것입니다.
+9. `share/kocom/` 폴더에 있는 `kocom.conf` 파일을 본인 환경에 맞게 수정합니다.
+10. "START" 버튼으로 애드온을 실행합니다.
 
-만일 kocom.py 파일을 수정하시려면 한번 실행한 후 애드온을 Stop 하시고
-share/kocom/ 폴더에 있는 파일을 알맞게 수정하신 다음에
-애드온을 Start 하시면 이후부터는 수정된 파일을 적용합니다.
+이 fork는 `share/kocom/kocom.py`가 이미 존재하면 시작 시 덮어쓰지 않습니다.
+따라서 `kocom.py` 파일을 수정하려면 한번 실행한 후 애드온을 Stop 하시고
+`share/kocom/` 폴더에 있는 파일을 수정한 다음
+애드온을 다시 Start 하시면 이후부터는 수정된 파일을 계속 사용합니다.
 
 ## Change log
 
@@ -55,7 +58,7 @@ share/kocom/ 폴더에 있는 파일을 알맞게 수정하신 다음에
 (2019.11.13수정) checksum 을 계산하다보니 아무래도 header는 aa55까지인 것 같습니다. 다시 수정하였습니다. python 소스코드도 수정되었습니다
 
 [forum]: https://cafe.naver.com/koreassistant
-[github]: https://github.com/clipman/kocom.py
+[github]: https://github.com/pmkid00/kocom.py
 [aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
 [amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg
 [armhf-shield]: https://img.shields.io/badge/armhf-yes-green.svg

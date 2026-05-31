@@ -1,7 +1,7 @@
 ---
-name: Kocom Wallpad with RS485
+name: Kocom Wallpad with RS485 (Fork)
 version: 2024.03.12
-slug: kocom_py
+slug: kocom_py_fork
 description: Kocom Wallpad for Home Assistant
 arch:
   - armhf
@@ -9,7 +9,7 @@ arch:
   - aarch64
   - amd64
   - i386
-url: https://github.com/clipman/kocom.py
+url: https://github.com/pmkid00/kocom.py
 startup: application
 boot: auto
 uart: true

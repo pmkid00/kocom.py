@@ -1,5 +1,5 @@
 {
-	"name": "Home Assistant Add-on: Kocom",
-	"url": "https://github.com/clipman/kocom.py",
-	"maintainer": "Minsoo Kim <clipman@naver.com>"
+	"name": "Home Assistant Add-on: Kocom (Fork)",
+	"url": "https://github.com/pmkid00/kocom.py",
+	"maintainer": "Moonkwon Park <pmkid00@gmail.com>"
 }
