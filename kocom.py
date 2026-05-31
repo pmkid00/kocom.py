@@ -40,13 +40,13 @@ type_t_dic = {'30b':'send', '30d':'ack'}
 seq_t_dic = {'c':1, 'd':2, 'e':3, 'f':4}
 device_t_dic = {'01':'wallpad', '0e':'light', '2c':'gas', '36':'thermo', '3b': 'plug', '44':'elevator', '48':'fan'}
 cmd_t_dic = {'00':'state', '01':'on', '02':'off', '3a':'query'}
-room_t_dic = {'00':'livingroom', '01':'bedroom', '02':'room1', '03':'room2'}
+room_t_dic = {'00':'livingroom', '01':'room1', '02':'room2', '03':'room3', '04':'room4', '05':'room5'}
 
 type_h_dic = {v: k for k, v in type_t_dic.items()}
 seq_h_dic = {v: k for k, v in seq_t_dic.items()}
 device_h_dic = {v: k for k, v in device_t_dic.items()}
 cmd_h_dic = {v: k for k, v in cmd_t_dic.items()}
-room_h_dic = {'livingroom':'00', 'myhome':'00', 'bedroom':'01', 'room1':'02', 'room2':'03'}
+room_h_dic = {'livingroom':'00', 'myhome':'00', 'room1':'01', 'room2':'02', 'room3':'03', 'room4':'04', 'room5':'05'}
 
 # mqtt functions ----------------------------
 
@@ -405,12 +405,14 @@ def mqtt_on_message(mqttc, obj, msg):
 
     # thermo heat/off : kocom/room/thermo/3/heat_mode/command
     if 'thermo' in topic_d and 'heat_mode' in topic_d:
-        heatmode_dic = {'heat': '11', 'off': '01'} 
+        heatmode_dic = {
+            'heat': config.get('User', 'thermo_heat_value', fallback='11'),
+            'off': config.get('User', 'thermo_off_value', fallback='01'),
+        }
 
         dev_id = device_h_dic['thermo']+'{0:02x}'.format(int(topic_d[3]))
         q = query(dev_id)
-        #settemp_hex = q['value'][4:6] if q['flag']!=False else '14'
-        settemp_hex = '{0:02x}'.format(int(config.get('User', 'init_temp'))) if q['flag']!=False else '14'
+        settemp_hex = q['value'][4:6] if q['flag'] != False and len(q['value']) >= 6 else '{0:02x}'.format(int(config.get('User', 'init_temp')))
         value = heatmode_dic.get(command) + '00' + settemp_hex + '0000000000' 
         send_wait_response(dest=dev_id, value=value, log='thermo heatmode')
 
@@ -662,7 +664,11 @@ def publish_discovery(dev, sub=''):
             if logtxt != "" and config.get('Log', 'show_mqtt_publish') == 'True':
                 logging.info(logtxt)
     elif dev == 'thermo':
-        num= int(room_h_dic.get(sub))
+        room_id = room_h_dic.get(sub)
+        if room_id is None:
+            logging.error('[MQTT Discovery|thermo] unsupported room name: {}'.format(sub))
+            return
+        num= int(room_id)
         #ha_topic = 'homeassistant/climate/kocom_livingroom_thermostat/config'
         topic = 'homeassistant/climate/kocom_{}_thermostat/config'.format(sub)
         payload = {
